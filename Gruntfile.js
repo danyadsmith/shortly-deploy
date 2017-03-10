@@ -122,8 +122,8 @@ module.exports = function(grunt) {
     if (grunt.option('prod')) {
       // add your production server task here
       // send our best and newest up to droplet
-      grunt.task.requires('build');
-
+      grunt.task.run(['build']);
+      grunt.task.run(['shell:prodServer']);
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
@@ -132,8 +132,9 @@ module.exports = function(grunt) {
   grunt.registerTask('deploy', function(){
     // add your deploy tasks here
     // build and run app locally
-    grunt.task.requires('test');
-    grunt.task.run('upload');
+    grunt.task.run(['test']);
+    // grunt.task.requires('test');
+    grunt.task.run(['upload']);
   });
 
   grunt.registerTask('runShell', [
